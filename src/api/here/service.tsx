@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-
 import Here from './config';
-import {FlatList, View} from 'react-native';
-import PlaceCard from "../../components/landing/place/place_card";
 
 export default class PlacesService extends Component {
     state = {
@@ -40,3 +37,4 @@ export default class PlacesService extends Component {
             });
     };
 }
+
