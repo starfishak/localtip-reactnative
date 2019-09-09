@@ -3,6 +3,6 @@ import places from './places';
 
 const rootReducer = combineReducers({
     places
-})
+});
 
-export default rootReducer
+export default rootReducer;

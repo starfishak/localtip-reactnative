@@ -9,11 +9,16 @@ import { connect } from 'react-redux';
 class LandingScreen extends React.Component {
 
     componentDidMount() {
-        this.props.fetch_places("-41.2907079,174.771661","1000")
+        console.log("made it here")
+        let info = fetch_places("-41.2907079,174.771661","1000")
+        console.log("INFO")
+        console.log(info)
+        this.setState(info)
     }
 
     render() {
-        const { data, isFetching } = this.props.data
+        // console.log("props: ", this.props)
+        const { data, isFetching } = this.props
         if(isFetching) {
             return(
                 <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
@@ -24,33 +29,10 @@ class LandingScreen extends React.Component {
         else {
             return(
                 <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-                    <Text>data.results</Text>
+                    <Text>{data}</Text>
                 </View>
             )
         }
-
-            {/*<View style={styles.container}>*/}
-            {/*    <FlatList*/}
-            {/*        contentContainerStyle={{*/}
-            {/*            flex: 1,*/}
-            {/*            flexDirection: 'column',*/}
-            {/*            height: '100%',*/}
-            {/*            width: '100%'*/}
-            {/*        }}*/}
-            {/*        data={this.state.data}*/}
-            {/*        keyExtractvor={item => item.id.toString()}*/}
-            {/*        renderItem={({ item }) => (*/}
-            {/*            <View*/}
-            {/*                style={{*/}
-            {/*                    marginTop: 25,*/}
-            {/*                    width: '50%'*/}
-            {/*                }}*/}
-            {/*            >*/}
-            {/*                <PlaceCard name={item.title} place_address={item.vicinity} />*/}
-            {/*            </View>*/}
-            {/*        )}*/}
-            {/*    />*/}
-            {/*</View>*/}
     };
 }
 
@@ -75,4 +57,5 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default LandingScreen;
+
+export default connect(mapStateToProps, mapDispatchToProps)(LandingScreen)

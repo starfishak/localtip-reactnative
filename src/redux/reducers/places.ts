@@ -18,7 +18,7 @@ export default function placesReducer(state = initialState, action) {
             return {
                 ...state,
                 isFetching: false,
-                todos: action.data
+                data: action.data
             }
         case FETCH_PLACES_FAILURE:
             return {
