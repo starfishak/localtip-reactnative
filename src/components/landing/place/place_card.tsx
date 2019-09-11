@@ -1,41 +1,53 @@
 import React from 'react';
-import glamorous from 'glamorous-native';
+import {Text, View, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Card} from "react-native-elements";
+import {colors} from "../../../styles/theme";
 
-// app theme colors
-import { colors } from '../../../styles/theme';
-
-// components
-import Title from './place_card';
-import Address from './place_address'
-
-const CardContainer = glamorous.view((props, theme) => {
-    return ({
-        height: 160,
-        width: '85%',
-        left: '7.5%',
-        justifyContent: 'space-around'
-    });
-});
-
-const PlaceNameContainer = glamorous.view((props, theme) => {
-    return ({
-        height: '30%',
-        backgroundColor: colors.deep_sky_blue,
-        justifyContent: 'center'
-    });
-});
-
-const PlaceCard = ({ place_name, place_address }) => {
+const PlaceCard = ({ place_data, navigation }) => {
     return (
-        <CardContainer>
-            <PlaceNameContainer>
-                <Title align="center" color={colors.white}>
-                    {place_name}
-                </Title>
-            </PlaceNameContainer>
-            <Address>{place_address}</Address>
-        </CardContainer>
+        <TouchableOpacity onPress={() => {
+            navigation.navigate('Details',
+                {id: place_data.id})
+        }}>
+            <Card title={place_data.title}>
+                <View style={styles.place_card}>
+                    {/*<Image*/}
+                    {/*    style={styles.header_image}*/}
+                    {/*    resizeMode="cover"*/}
+                    {/*    source={{ uri: `https://images.unsplash.com/photo-1442483221814-59f7d8b22739?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80`  }} // call place*/}
+                    {/*/>*/}
+                    <Text style={styles.place_address}>{place_data.vicinity}</Text>
+                </View>
+            </Card>
+        </TouchableOpacity>
     );
 };
 
 export default PlaceCard;
+
+const styles = StyleSheet.create({
+    place_title: {
+        fontFamily: 'sans-serif-light',
+        fontSize: 20,
+        color: colors.black,
+        lineHeight: 18,
+        textAlign: 'left',
+        alignSelf: 'center'
+    },
+    place_address: {
+        fontFamily: 'sans-serif-light',
+        fontSize: 12,
+        color: colors.black,
+        lineHeight: 16,
+        textAlign: 'left',
+        alignSelf: 'center'
+    },
+    place_card : {
+        fontFamily: 'sans-serif-light',
+        fontSize: 30,
+        color: colors.black,
+        lineHeight: 16,
+        textAlign: 'left',
+        alignSelf: 'center'
+    }
+});

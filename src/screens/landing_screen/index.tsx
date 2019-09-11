@@ -1,30 +1,29 @@
-import React from "react";
-import {ActivityIndicator, Button, FlatList, StyleSheet, Text, View} from "react-native";
-import Greeting from '../../components/Greeting';
+import React, {Props} from "react";
+import {ActivityIndicator, FlatList, StyleSheet, View} from "react-native";
 import PlaceCard from "../../components/landing/place/place_card";
-import fetch_places from '../../redux/actions/fetch_places';
+import fetch_places from '../../api/here/fetch_places';
 import { getPlaces, getPlacesSuccess, getPlacesError } from '../../redux/reducers/places'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-class LandingScreen extends React.Component {
+type Props = { fetchPlaces : Function, navigation : Navigator, data: Object, isFetching : boolean };
+
+class LandingScreen extends React.Component<Props> {
 
     constructor(props) {
         super(props);
-        this.shouldComponentRender = this.shouldComponentRender.bind(this);
+        // this.shouldComponentRender = this.shouldComponentRender.bind(this);
     }
 
     componentWillMount() {
         console.log("about to fetch");
         this.props.fetchPlaces("-41.2907079,174.771661","1000");
-        // fetch_places();
     }
 
-    shouldComponentRender() {
-        const fetchPlaces = this.props;
-        return fetchPlaces !== false;
-
-    }
+    // shouldComponentRender() {
+    //     const fetchPlaces = this.props;
+    //     return fetchPlaces !== false;
+    // }
 
     render() {
         // @ts-ignore
@@ -38,10 +37,17 @@ class LandingScreen extends React.Component {
             )
         }
         else {
+            console.log("Data success. returning flatlist")
+            type Item = {
+                id : string
+            }
+
             return(
-                <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-                    <Text>{data.search.context.location.address.text}</Text>
-                </View>
+                <FlatList
+                    data={data.results.items}
+                    renderItem={({ item }) => <PlaceCard place_data={item} navigation={this.props.navigation} />}
+                    keyExtractor={(item : Item) => item.id}
+                />
             )
         }
     };
