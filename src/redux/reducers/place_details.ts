@@ -1,8 +1,4 @@
-import {
-    FETCHING_PLACE_DETAILS,
-    FETCH_PLACE_DETAILS_SUCCESS,
-    FETCH_PLACE_DETAILS_FAILURE
-} from '../../constants';
+import {FETCHING_PLACE_DETAILS, FETCH_PLACE_DETAILS_SUCCESS, FETCH_PLACE_DETAILS_FAILURE} from '../../constants';
 
 const initialState = {
     data: {},
@@ -10,15 +6,16 @@ const initialState = {
     error: false
 };
 
-export default function placesReducer(state = initialState, action) {
+export default function placeDetailsReducer(state = initialState, action) {
     switch(action.type) {
         case FETCHING_PLACE_DETAILS:
+            console.log("Fetching Reducers");
             return {
                 ...state,
                 isFetching: true
             };
         case FETCH_PLACE_DETAILS_SUCCESS:
-            console.log('action.data:', action.data)
+            console.log("Success Reducers");
             return {
                 ...state,
                 isFetching: false,

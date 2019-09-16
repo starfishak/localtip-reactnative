@@ -29,9 +29,11 @@ export function getPlaceDetails() {
 }
 
 export function getPlaceDetailsSuccess(data) {
+    console.log("Place Details Success");
     return {
         type: FETCH_PLACE_DETAILS_SUCCESS,
-        data: data
+        data: data,
+        isFetching: false
     }
 }
 

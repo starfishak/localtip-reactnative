@@ -1,4 +1,4 @@
-import React, {Props} from "react";
+import React from "react";
 import {ActivityIndicator, FlatList, StyleSheet, View} from "react-native";
 import PlaceCard from "../../components/landing/place/place_card";
 import fetch_places from '../../api/here/fetch_places';
@@ -27,17 +27,18 @@ class LandingScreen extends React.Component<Props> {
 
     render() {
         // @ts-ignore
-        const {isFetching, data} = this.props;
+        const {isFetching, data, navigation} = this.props;
+        console.log("&&data", data);
         console.log("isFetching: ", isFetching);
         if(isFetching) {
             return(
-                <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{flex: 1, flexDirplacesReducerection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                     <ActivityIndicator size={'large'} />
                 </View>
             )
         }
         else {
-            console.log("Data success. returning flatlist")
+            console.log("Data success. returning flatlist.")
             type Item = {
                 id : string
             }
@@ -45,7 +46,7 @@ class LandingScreen extends React.Component<Props> {
             return(
                 <FlatList
                     data={data.results.items}
-                    renderItem={({ item }) => <PlaceCard place_data={item} navigation={this.props.navigation} />}
+                    renderItem={({ item }) => <PlaceCard place_data={item} navigation={navigation} />}
                     keyExtractor={(item : Item) => item.id}
                 />
             )

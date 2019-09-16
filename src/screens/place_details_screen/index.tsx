@@ -1,38 +1,59 @@
 import React from "react";
-import {Button, StyleSheet, Text, View} from "react-native";
-import {getPlaceDetails, getPlaceDetailsSuccess, getPlaceDetailsError} from "../../redux/reducers/place_details";
+import {Button, StyleSheet, Text, View, Image, ActivityIndicator} from "react-native";
+import {getPlaceDetails, getPlaceDetailsSuccess, getPlaceDetailsError} from "../../redux/reducers/places";
 import {bindActionCreators} from "redux";
 import fetch_place_details from "../../api/here/fetch_place_details";
 import { connect } from 'react-redux';
-import {getPlaceDetailsFailure} from "../../redux/actions/actions";
 
-const Props = {
-    navigation : navigator,
-    fetchPlaceInfo : Function
+type Props = {
+    navigation : any,
+    fetchPlaceDetails : Function
+    data: Object,
+    image: string,
+    isFetching : boolean
 };
 
 class PlaceDetailsScreen extends React.Component<Props> {
-    componentWillMount(): void {
+    // constructor(props) {
+    //     super(props);
+    // }
+
+    componentWillMount() {
         const {navigation: navigation} = this.props;
         const place_id = navigation.getParam('id');
         console.log("place_id", place_id);
         this.props.fetchPlaceDetails(place_id);
+        this.render();
     }
 
     render() {
-        // @ts-ignore
-        const {navigation: navigation} = this.props;
+        const {data, isFetching, navigation} = this.props;
         const place_id = navigation.getParam('id');
-        return (
-            <View style={styles.container}>
-                <Text>Place Details Page</Text>
-                <Text>{place_id}</Text>
-                <Button
-                    onPress={() => navigation.navigate('Landing')}
-                    title="Home"
-                />
-            </View>
-        );
+        console.log("isFetching:",isFetching, "Image:", data['image']);
+        if(isFetching) {
+            return(
+                <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+                    <ActivityIndicator size={'large'} />
+                </View>
+            )
+        }
+        else {
+            return (
+                <View style={styles.container}>
+                    <Image
+                        source={{uri:data.image}}
+                        style={{width: 200, height: 300}}
+                        PlaceholderContent={<ActivityIndicator/>}
+                    />
+                    <Text>Place Details Page</Text>
+                    <Text>{data['name']}</Text>
+                    <Button
+                        onPress={() => navigation.navigate('Landing')}
+                        title="Home"
+                    />
+                </View>
+            );
+        }
     };
 }
 
@@ -48,7 +69,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
     isFetching: getPlaceDetails(state),
     data: getPlaceDetailsSuccess(state),
-    error: getPlaceDetailsFailure(state)
+    error: getPlaceDetailsError(state),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
