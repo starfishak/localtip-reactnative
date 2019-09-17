@@ -1,4 +1,4 @@
-import {FETCH_PLACES_FAILURE, FETCH_PLACES_SUCCESS, FETCHING_PLACES, FETCHING_PLACE_DETAILS, FETCH_PLACE_DETAILS_SUCCESS, FETCH_PLACE_DETAILS_FAILURE} from "../../constants";
+import {FETCH_PLACES_FAILURE, FETCH_PLACES_SUCCESS, FETCHING_PLACES, FETCHING_PLACE_DETAILS, FETCH_PLACE_DETAILS_SUCCESS, FETCH_PLACE_DETAILS_FAILURE} from "../constants";
 
 export function getPlaces() {
     return {
@@ -29,7 +29,6 @@ export function getPlaceDetails() {
 }
 
 export function getPlaceDetailsSuccess(data) {
-    console.log("Place Details Success");
     return {
         type: FETCH_PLACE_DETAILS_SUCCESS,
         data: data,

@@ -1,9 +1,10 @@
 import React from "react";
-import {Button, StyleSheet, Text, View, Image, ActivityIndicator} from "react-native";
-import {getPlaceDetails, getPlaceDetailsSuccess, getPlaceDetailsError} from "../../redux/reducers/places";
+import {Button, StyleSheet, Text, View, Image, ActivityIndicator, Dimensions} from "react-native";
+import {getPlaceDetails, getPlaceDetailsSuccess, getPlaceDetailsError} from "../../redux/reducers";
 import {bindActionCreators} from "redux";
 import fetch_place_details from "../../api/here/fetch_place_details";
 import { connect } from 'react-redux';
+import {colors} from "../../styles/theme";
 
 type Props = {
     navigation : any,
@@ -13,10 +14,23 @@ type Props = {
     isFetching : boolean
 };
 
+type Data = {
+    data: object,
+    image : string
+    isFetching: boolean,
+    error: any
+}
+
 class PlaceDetailsScreen extends React.Component<Props> {
-    // constructor(props) {
-    //     super(props);
-    // }
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: navigation.getParam('place_title'),
+            headerTitleStyle: {
+                fontWeight: 'bold',
+                fontFamily: 'sans-serif-light'
+            }
+        };
+    };
 
     componentWillMount() {
         const {navigation: navigation} = this.props;
@@ -27,9 +41,9 @@ class PlaceDetailsScreen extends React.Component<Props> {
     }
 
     render() {
-        const {data, isFetching, navigation} = this.props;
-        const place_id = navigation.getParam('id');
-        console.log("isFetching:",isFetching, "Image:", data['image']);
+        const {isFetching, navigation, data} = this.props;
+        console.log("image:",data.image,isFetching);
+        console.log("title:", navigation.getParam('place_title'));
         if(isFetching) {
             return(
                 <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
@@ -42,28 +56,60 @@ class PlaceDetailsScreen extends React.Component<Props> {
                 <View style={styles.container}>
                     <Image
                         source={{uri:data.image}}
-                        style={{width: 200, height: 300}}
+                        style={styles.image}
                         PlaceholderContent={<ActivityIndicator/>}
                     />
-                    <Text>Place Details Page</Text>
-                    <Text>{data['name']}</Text>
-                    <Button
-                        onPress={() => navigation.navigate('Landing')}
-                        title="Home"
-                    />
+                    <View style={styles.text_container}>
+                        <Text style={styles.place_title}>{data['name']}</Text>
+                        {/*<Text style={styles.place_category}>{data.}</Text>*/}
+                        <Button
+                            onPress={() => navigation.navigate('Landing')}
+                            title="Home"
+                        />
+                    </View>
                 </View>
             );
         }
     };
 }
 
+const win = Dimensions.get('window');
+
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+    image: {
+        width: win.width,
+        height: 250,
     },
+    text_container: {
+        flex: 1,
+    },
+    place_title: {
+        paddingTop: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        fontFamily: 'sans-serif-light',
+        fontSize: 20,
+        color: colors.black,
+        fontWeight: 'bold',
+        lineHeight: 18,
+        textAlign: 'left',
+    },
+    place_category: {
+        fontFamily: 'sans-serif-light',
+        fontSize: 12,
+        color: colors.grey,
+        lineHeight: 16,
+        textAlign: 'left',
+        // alignSelf: 'center'
+    },
+    place_card : {
+        fontFamily: 'sans-serif-light',
+        fontSize: 30,
+        color: colors.black,
+        lineHeight: 16,
+        textAlign: 'left',
+        alignSelf: 'center'
+    }
 });
 
 const mapStateToProps = (state) => ({

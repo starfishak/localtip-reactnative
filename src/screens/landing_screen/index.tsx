@@ -2,7 +2,7 @@ import React from "react";
 import {ActivityIndicator, FlatList, StyleSheet, View} from "react-native";
 import PlaceCard from "../../components/landing/place/place_card";
 import fetch_places from '../../api/here/fetch_places';
-import { getPlaces, getPlacesSuccess, getPlacesError } from '../../redux/reducers/places'
+import { getPlaces, getPlacesSuccess, getPlacesError } from '../../redux/reducers'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 

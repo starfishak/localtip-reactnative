@@ -5,15 +5,22 @@ import {
     FETCHING_PLACE_DETAILS,
     FETCH_PLACE_DETAILS_SUCCESS,
     FETCH_PLACE_DETAILS_FAILURE
-} from '../../constants';
+} from '../constants';
 
 const initialState = {
-    data: {results:{items:[]}},
-    isFetching: true,
-    error: false
+    landing : {
+        data: {},
+        isFetching: true,
+        error: false
+    },
+    details : {
+        data: {},
+        isFetching: true,
+        error: false
+    }
 };
 
-export default function placesReducer(state = initialState, action) {
+function placesReducer(state = initialState, action) {
     switch (action.type) {
         case FETCHING_PLACES:
             return {
@@ -32,14 +39,19 @@ export default function placesReducer(state = initialState, action) {
                 isFetching: false,
                 error: true
             };
+        default:
+            return state
+    }
+}
+
+function placeDetailsReducer(state = initialState, action) {
+    switch(action.type) {
         case FETCHING_PLACE_DETAILS:
-            console.log("Fetching Reducers");
             return {
                 ...state,
                 isFetching: true
             };
         case FETCH_PLACE_DETAILS_SUCCESS:
-            console.log("Success Reducers");
             return {
                 ...state,
                 isFetching: false,
@@ -56,18 +68,17 @@ export default function placesReducer(state = initialState, action) {
     }
 }
 
-// function placeDetailsReducer(state = initialState, action) {
-//     switch(action.type) {
-//
-//         default:
-//             return state
-//     }
-// }
+export default function localtipReducer(state = initialState, action) {
+    return {
+        landing: placesReducer(state.landing, action),
+        details: placeDetailsReducer(state.details, action)
+    }
+}
 
-export const getPlaces = state => state.isFetching;
-export const getPlacesSuccess = state => state.data;
-export const getPlacesError = state => state.error;
+export const getPlaces = state => state.landing.isFetching;
+export const getPlacesSuccess = state => state.landing.data;
+export const getPlacesError = state => state.landing.error;
 
-export const getPlaceDetails = state => state.isFetching;
-export const getPlaceDetailsSuccess= state => state.data;
-export const getPlaceDetailsError = state => state.error;
+export const getPlaceDetails = state => state.details.isFetching;
+export const getPlaceDetailsSuccess= state => state.details.data;
+export const getPlaceDetailsError = state => state.details.error;

@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text, View, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {Card} from "react-native-elements";
-import {colors} from "../../../styles/theme";
+import {colors} from "../../styles/theme";
 
-const PlaceCard = ({ place_data, navigation }) => {
+const PlaceTitleCard = ({ place_data }) => {
     return (
         <TouchableOpacity onPress={() => {
             navigation.navigate('Details',
@@ -23,7 +23,7 @@ const PlaceCard = ({ place_data, navigation }) => {
     );
 };
 
-export default PlaceCard;
+export default PlaceTitleCard;
 
 const styles = StyleSheet.create({
     place_title: {

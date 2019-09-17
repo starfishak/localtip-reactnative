@@ -1,5 +1,5 @@
 import Cred from './cred'
-import {getPlaces, getPlacesFailure, getPlacesSuccess} from "../../redux/actions/actions";
+import {getPlaces, getPlacesFailure, getPlacesSuccess} from "../../redux/actions";
 
 export function fetch_places(location : string, radius : string) {
     return (dispatch) => {
