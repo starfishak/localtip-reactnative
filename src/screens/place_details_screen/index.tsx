@@ -61,7 +61,8 @@ class PlaceDetailsScreen extends React.Component<Props> {
                     />
                     <View style={styles.text_container}>
                         <Text style={styles.place_title}>{data['name']}</Text>
-                        {/*<Text style={styles.place_category}>{data.}</Text>*/}
+                        {data['categories'].map(item => <Text key={item.id} style={styles.place_category}>{item.title}</Text>)}
+
                         <Button
                             onPress={() => navigation.navigate('Landing')}
                             title="Home"
@@ -95,12 +96,13 @@ const styles = StyleSheet.create({
         textAlign: 'left',
     },
     place_category: {
+        marginLeft: 5,
+        marginRight: 5,
         fontFamily: 'sans-serif-light',
         fontSize: 12,
         color: colors.grey,
         lineHeight: 16,
         textAlign: 'left',
-        // alignSelf: 'center'
     },
     place_card : {
         fontFamily: 'sans-serif-light',

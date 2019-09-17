@@ -4,7 +4,8 @@ import {getPlaceDetails, getPlaceDetailsSuccess, getPlaceDetailsFailure} from ".
 export function fetch_place_info(place_id : string ) {
     return (dispatch) => {
         dispatch(getPlaceDetails());
-        console.log(`https://places.cit.api.here.com/places/v1/places/lookup?app_code=${Cred.apiCode}&app_id=${Cred.apiKey}&source=sharing&id=${place_id}`)
+        console.log(place_id)
+        console.log(`https://places.cit.api.here.com/places/v1/places/lookup?id=${place_id}&app_code=${Cred.apiCode}&app_id=${Cred.apiKey}&source=sharing`);
         fetch(`https://places.cit.api.here.com/places/v1/places/lookup?app_code=${Cred.apiCode}&app_id=${Cred.apiKey}&source=sharing&id=${place_id}`)
             .then(res => res.json())
             .then(async json => {
