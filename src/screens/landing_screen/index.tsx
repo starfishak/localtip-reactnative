@@ -1,5 +1,15 @@
 import React from "react";
-import {ActivityIndicator, FlatList, StyleSheet, View} from "react-native";
+import {
+    ActivityIndicator,
+    FlatList,
+    StyleSheet,
+    View,
+    Animated,
+    Platform,
+    RefreshControl,
+    StatusBar,
+    Text, TouchableOpacity
+} from "react-native";
 import PlaceCard from "../../components/landing/place/place_card";
 import fetch_places from '../../api/here/fetch_places';
 import { getPlaces, getPlacesSuccess, getPlacesError } from '../../redux/reducers'
@@ -7,12 +17,22 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 type Props = { fetchPlaces : Function, navigation : Navigator, data: Object, isFetching : boolean };
+type Data = {results : any}
+const HEADER_MAX_HEIGHT = 300;
+const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
+const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 class LandingScreen extends React.Component<Props> {
 
     constructor(props) {
         super(props);
-        // this.shouldComponentRender = this.shouldComponentRender.bind(this);
+        this.state = {
+            scrollY: new Animated.Value(
+                // iOS has negative initial scroll value because content inset...
+                Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
+            ),
+            refreshing: false,
+        };
     }
 
     componentWillMount() {
@@ -20,10 +40,19 @@ class LandingScreen extends React.Component<Props> {
         this.props.fetchPlaces("-41.2907079,174.771661","1000");
     }
 
-    // shouldComponentRender() {
-    //     const fetchPlaces = this.props;
-    //     return fetchPlaces !== false;
-    // }
+    _renderPlacesList(data : Data) {
+        const navigation = this.props;
+        type Item = {
+            id : string
+        }
+        console.log(data.results);
+        return (
+            <View style={styles.scrollViewContent}>
+                {data.results.items.map(item => <PlaceCard key={item.id} place_data={item} navigation={navigation} />)}
+                {/*{data.results.items.map(item => <Text key={item.placeId}>{item.name}</Text>)}*/}
+            </View>
+        )
+    }
 
     render() {
         // @ts-ignore
@@ -39,25 +68,156 @@ class LandingScreen extends React.Component<Props> {
         }
         else {
             console.log("Data success. returning flatlist.")
-            type Item = {
-                id : string
-            }
+            const scrollY = Animated.add(
+                this.state.scrollY,
+                Platform.OS === 'ios' ? HEADER_MAX_HEIGHT : 0,
+            );
+            const headerTranslate = scrollY.interpolate({
+                inputRange: [0, HEADER_SCROLL_DISTANCE],
+                outputRange: [0, -HEADER_SCROLL_DISTANCE],
+                extrapolate: 'clamp',
+            });
 
+            const imageOpacity = scrollY.interpolate({
+                inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+                outputRange: [1, 1, 0],
+                extrapolate: 'clamp',
+            });
+            const imageTranslate = scrollY.interpolate({
+                inputRange: [0, HEADER_SCROLL_DISTANCE],
+                outputRange: [0, 100],
+                extrapolate: 'clamp',
+            });
+
+            const titleScale = scrollY.interpolate({
+                inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+                outputRange: [1, 1, 0.8],
+                extrapolate: 'clamp',
+            });
+            const titleTranslate = scrollY.interpolate({
+                inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+                outputRange: [0, 0, -8],
+                extrapolate: 'clamp',
+            });
             return(
-                <FlatList
-                    data={data.results.items}
-                    renderItem={({ item }) => <PlaceCard place_data={item} navigation={navigation} />}
-                    keyExtractor={(item : Item) => item.id}
-                />
+                <View style={styles.fill}>
+                    <StatusBar
+                        translucent
+                        barStyle="light-content"
+                        backgroundColor="rgba(0, 0, 0, 0.251)"
+                    />
+                    <Animated.ScrollView
+                        style={styles.fill}
+                        scrollEventThrottle={1}
+                        onScroll={Animated.event(
+                            [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
+                            { useNativeDriver: true },
+                        )}
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={this.state.refreshing}
+                                onRefresh={() => {
+                                    this.setState({ refreshing: true });
+                                    setTimeout(() => this.setState({ refreshing: false }), 1000);
+                                }}
+                                // Android offset for RefreshControl
+                                progressViewOffset={HEADER_MAX_HEIGHT}
+                            />
+                        }
+                    >
+                        {data.results.items.map(item => <PlaceCard key={item.id} place_data={item} navigation={navigation} />)}
+                    </Animated.ScrollView>
+                    <Animated.View
+                        pointerEvents="none"
+                        style={[
+                            styles.header,
+                            { transform: [{ translateY: headerTranslate }] },
+                        ]}
+                    >
+                        <Animated.Image
+                            style={[
+                                styles.backgroundImage,
+                                {
+                                    opacity: imageOpacity,
+                                    transform: [{ translateY: imageTranslate }],
+                                },
+                            ]}
+                            source={{uri:data.header_image.url}}
+                        />
+                    </Animated.View>
+                    <Animated.View
+                        style={[
+                            styles.bar,
+                            {
+                                transform: [
+                                    { scale: titleScale },
+                                    { translateY: titleTranslate },
+                                ],
+                            },
+                        ]}
+                    >
+                        <Text style={styles.title}>{data.search.context.location.address.district}</Text>
+                        <Text style={styles.city_title}>{data.search.context.location.address.city}</Text>
+                    </Animated.View>
+                </View>
             )
         }
     };
 }
 
 const styles = StyleSheet.create({
-    container: {
+    fill: {
         flex: 1,
-        backgroundColor: '#fff',
+    },
+    content: {
+        flex: 1,
+    },
+    header: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: '#2A5E8D',
+        overflow: 'hidden',
+        height: HEADER_MAX_HEIGHT,
+    },
+    backgroundImage: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        width: null,
+        height: HEADER_MAX_HEIGHT,
+        resizeMode: 'cover',
+    },
+    bar: {
+        backgroundColor: 'transparent',
+        marginTop: Platform.OS === 'ios' ? 28 : 38,
+        height: 32,
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+    },
+    title: {
+        color: 'white',
+        fontSize: 18,
+    },
+    city_title: {
+        color: 'white',
+        fontSize: 18,
+        marginBottom: 5
+    },
+    scrollViewContent: {
+        // iOS uses content inset, which acts like padding.
+        paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0,
+    },
+    row: {
+        height: 40,
+        margin: 16,
+        backgroundColor: '#D3D3D3',
         alignItems: 'center',
         justifyContent: 'center',
     },

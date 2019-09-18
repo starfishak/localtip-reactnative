@@ -77,12 +77,17 @@ class PlaceDetailsScreen extends React.Component<Props> {
 const win = Dimensions.get('window');
 
 const styles = StyleSheet.create({
+    container: {
+
+    },
     image: {
         width: win.width,
         height: 250,
     },
     text_container: {
         flex: 1,
+        paddingRight: 10,
+        paddingLeft: 10
     },
     place_title: {
         paddingTop: 10,
@@ -101,7 +106,7 @@ const styles = StyleSheet.create({
         fontFamily: 'sans-serif-light',
         fontSize: 12,
         color: colors.grey,
-        lineHeight: 16,
+        lineHeight: 12,
         textAlign: 'left',
     },
     place_card : {

@@ -1,22 +1,18 @@
 import React from 'react';
-import {Text, View, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, Image, StyleSheet, TouchableOpacity, WebView, Dimensions} from 'react-native';
 import {Card} from "react-native-elements";
 import {colors} from "../../../styles/theme";
 
 const PlaceCard = ({ place_data, navigation }) => {
     return (
-        <TouchableOpacity onPress={() => {
+        <TouchableOpacity style={styles.place_card} onPress={() => {
             navigation.navigate('Details',
                 {id: place_data.id, place_title:place_data.title})
         }}>
             <Card title={place_data.title}>
-                <View style={styles.place_card}>
-                    {/*<Image*/}
-                    {/*    style={styles.header_image}*/}
-                    {/*    resizeMode="cover"*/}
-                    {/*    source={{ uri: `https://images.unsplash.com/photo-1442483221814-59f7d8b22739?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80`  }} // call place*/}
-                    {/*/>*/}
-                    <Text style={styles.place_address}>{place_data.vicinity}</Text>
+                <View >
+                    <WebView source={{html: `${place_data.vicinity}`}} />
+                    {/*<Text>Test</Text>*/}
                 </View>
             </Card>
         </TouchableOpacity>
@@ -25,6 +21,7 @@ const PlaceCard = ({ place_data, navigation }) => {
 
 export default PlaceCard;
 
+const win = Dimensions.get('window').width;
 const styles = StyleSheet.create({
     place_title: {
         fontFamily: 'sans-serif-light',
@@ -48,6 +45,7 @@ const styles = StyleSheet.create({
         color: colors.black,
         lineHeight: 16,
         textAlign: 'left',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        width: win*.8
     }
 });
