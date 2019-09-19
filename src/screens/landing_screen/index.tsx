@@ -40,16 +40,20 @@ class LandingScreen extends React.Component<Props> {
         this.props.fetchPlaces("-41.2907079,174.771661","1000");
     }
 
-    _renderPlacesList(data : Data) {
-        const navigation = this.props;
+    _renderPlacesList(props) {
+        const navigation = props.navigation;
+        console.log(navigation);
+        const data = props.data;
         type Item = {
             id : string
         }
-        console.log(data.results);
         return (
             <View style={styles.scrollViewContent}>
-                {data.results.items.map(item => <PlaceCard key={item.id} place_data={item} navigation={navigation} />)}
-                {/*{data.results.items.map(item => <Text key={item.placeId}>{item.name}</Text>)}*/}
+                <FlatList
+                    data={data.results.items}
+                    renderItem={({ item }) => <PlaceCard place_data={item} navigation={navigation} />}
+                    keyExtractor={(item : Item) => item.id}
+                />
             </View>
         )
     }
@@ -57,7 +61,6 @@ class LandingScreen extends React.Component<Props> {
     render() {
         // @ts-ignore
         const {isFetching, data, navigation} = this.props;
-        console.log("&&data", data);
         console.log("isFetching: ", isFetching);
         if(isFetching) {
             return(
@@ -125,7 +128,8 @@ class LandingScreen extends React.Component<Props> {
                             />
                         }
                     >
-                        {data.results.items.map(item => <PlaceCard key={item.id} place_data={item} navigation={navigation} />)}
+                        {this._renderPlacesList(this.props)}
+                        {/*{data.results.items.map(item => <PlaceCard key={item.id} place_data={item} navigation={navigation} />)}*/}
                     </Animated.ScrollView>
                     <Animated.View
                         pointerEvents="none"

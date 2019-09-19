@@ -12,7 +12,17 @@ const RootStack = createStackNavigator(
     },
     {
         initialRouteName: 'Landing',
-    }
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#2A5E8D',
+            },
+            headerTintColor: '#ffffff',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+            },
+        },
+    },
+
 );
 
 const AppContainer = createAppContainer(RootStack);

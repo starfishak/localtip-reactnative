@@ -11,8 +11,8 @@ const PlaceCard = ({ place_data, navigation }) => {
         }}>
             <Card title={place_data.title}>
                 <View >
-                    <WebView source={{html: `${place_data.vicinity}`}} />
-                    {/*<Text>Test</Text>*/}
+                    {/*<WebView source={{html: `${place_data.vicinity}`}} />*/}
+                    <Text>Test</Text>
                 </View>
             </Card>
         </TouchableOpacity>
