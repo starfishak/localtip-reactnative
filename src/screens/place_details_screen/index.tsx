@@ -10,7 +10,7 @@ import {
     FlatList,
     WebView,
     TouchableOpacity,
-    StatusBar
+    StatusBar, Linking, Platform
 } from "react-native";
 import {getPlaceDetails, getPlaceDetailsSuccess, getPlaceDetailsError} from "../../redux/reducers";
 import {bindActionCreators} from "redux";
@@ -18,6 +18,7 @@ import fetch_place_details from "../../api/here/fetch_place_details";
 import { connect } from 'react-redux';
 import {colors} from "../../styles/theme";
 import {Card} from "react-native-elements";
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 type Props = {
     navigation : any,
@@ -44,31 +45,13 @@ class PlaceDetailsScreen extends React.Component<Props> {
             headerTintColor: navigationOptions.headerStyle.backgroundColor,
             headerRight: (
                 <Button
-                    onPress={() => alert('This is a button!')}
-                    title="Info"
+                    onPress={() => _openUrl('This is a button!')}
+                    title="Navigate"
                     color="#2A5E8D"
                 />
             ),
-            // headerLeft: (
-            //     <Button
-            //         onPress={() => setTimeout(navigation.goBack, 0)}
-            //         title="Back"
-            //         color="#2A5E8D"
-            //     />
-            // )
         };
     };
-
-        // static navigationOptions = ({ navigation }) => {
-    //     return {
-    //         title: navigation.getParam('place_title'),
-    //         headerTitleStyle: {
-    //             fontWeight: 'bold',
-    //             fontFamily: 'sans-serif-light'
-    //         },
-    //         // headerLeft: <TouchableOpacity onPress={() => navigation.goBack(null)}><Image source={require('./close.png')} style={{marginTop: 10, marginLeft:10}} /></TouchableOpacity>
-    //     };
-    // };
 
     componentWillMount() {
         const {navigation: navigation} = this.props;
@@ -77,6 +60,31 @@ class PlaceDetailsScreen extends React.Component<Props> {
         this.props.fetchPlaceDetails(place_id);
         this.render();
     }
+
+    _openUrl = (url) => {
+        Linking.canOpenURL(url)
+            .then((supported) => {
+                if (!supported) {
+                    console.log("Can't handle url: " + url);
+                } else {
+                    return Linking.openURL(url);
+                }
+            })
+            .catch((err) => console.error('An error occurred', err));
+    }
+
+
+    _dialCall = (phone) => {
+        let phoneNumber = '';
+        if (Platform.OS === 'android') {
+            phoneNumber = `tel:${phone}`;
+        }
+        else {
+            phoneNumber = `telprompt:${phone}`;
+        }
+
+        Linking.openURL(phoneNumber);
+    };
 
     render() {
         const {isFetching, navigation, data} = this.props;
@@ -93,20 +101,16 @@ class PlaceDetailsScreen extends React.Component<Props> {
             // Render Other Components
             let phone_element = null;
             let website_element = null;
-            let hours_element = null;
-            // if (data.contacts.length > 0) {
             if (data.contacts.hasOwnProperty('phone')) {
-                phone_element = <Card title={data.contacts.phone[0].value} style={styles.contact_card}><View><Text>{data.contacts.phone[0].value}</Text></View></Card>;
+                let phone = data.contacts.phone[0].value
+                phone_element = <View><TouchableOpacity onPress={() => {this._dialCall(phone)}}><Card style={styles.contact_card}><View style={styles.data_container}><Icon name="call" size={20} color="#2A5E8D" style={styles.data_icon}/><Text>{data.contacts.phone[0].value}</Text></View></Card></TouchableOpacity></View>;
             }
             if (data.contacts.hasOwnProperty('website')) {
-                website_element = <Card title={data.contacts.website[0].value} style={styles.contact_card}><View><Text>{data.contacts.website[0].value}</Text></View></Card>;
+                let url = data.contacts.website[0].value;
+                website_element = <View><TouchableOpacity onPress={() => {this._openUrl(url)}}><Card style={styles.contact_card}><View style={styles.data_container}><Icon name="web" size={20} color="#2A5E8D" style={styles.data_icon}/><Text>{data.contacts.website[0].value}</Text></View></Card></TouchableOpacity></View>;
+
             }
-            // }
-            if (data.hasOwnProperty('extended')) {
-                if(data.extended.hasOwnProperty('openingHours')) {
-                    hours_element = <Card><WebView source={{html: `${data.extended.openingHours.text}`}} /></Card>;
-                }
-            }
+
             return (
                 <View style={styles.container}>
                     <StatusBar style={styles.status_bar}></StatusBar>
@@ -118,11 +122,9 @@ class PlaceDetailsScreen extends React.Component<Props> {
                     <View style={styles.text_container}>
                         <Text style={styles.place_title}>{data['name']}</Text>
                         {data['categories'].map(item => <Text key={item.id} style={styles.place_category}>{item.title}</Text>)}
-                        {/*<Card><WebView source={{html: `${data.location.address.text}`}} /></Card>*/}
                         {phone_element}
                         {website_element}
-                        {/*{hours_element}*/}
-                    </View>
+\                    </View>
                 </View>
             );
         }
@@ -142,7 +144,14 @@ const styles = StyleSheet.create({
         paddingBottom: 30,
     },
     contact_card: {
-        elevation:0
+        elevation:0,
+        backgroundColor:'#123',
+    },
+    data_icon: {
+        paddingRight: 10
+    },
+    data_container: {
+        flexDirection: 'row'
     },
     image: {
         width: win.width,

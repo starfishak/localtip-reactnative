@@ -8,7 +8,7 @@ import {
     Platform,
     RefreshControl,
     StatusBar,
-    Text, TouchableOpacity
+    Text
 } from "react-native";
 import PlaceCard from "../../components/landing/place/place_card";
 import fetch_places from '../../api/here/fetch_places';
