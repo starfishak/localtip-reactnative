@@ -5,7 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/landing/place/place_card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/landing/place/place_card.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/here/fetch_place_details.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/here/fetch_place_details.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/landing/place/place_card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/landing/place_card.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/landing_screen/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/landing_screen/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/place_details_screen/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/place_details_screen/index.tsx" afterDir="false" />
     </list>
@@ -28,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/src/api/here/fetch_place_details.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
-              <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
+              <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -39,20 +40,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/screens/place_details_screen/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="124" selection-start-line="124" selection-end-line="124" />
+            <state relative-caret-position="215">
+              <caret line="112" column="86" selection-start-line="112" selection-start-column="86" selection-end-line="112" selection-end-column="86" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/landing/place/place_card.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="14" selection-start-line="4" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -60,8 +52,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/screens/landing_screen/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-494">
-              <caret line="71" column="14" selection-start-line="71" selection-start-column="14" selection-end-line="71" selection-end-column="14" />
+            <state relative-caret-position="1710">
+              <caret line="130" column="36" selection-start-line="130" selection-start-column="36" selection-end-line="130" selection-end-column="36" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -70,9 +62,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/landing/place_card.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/here/fetch_places.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
+            <state relative-caret-position="75">
               <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
@@ -84,7 +85,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/unsplash/unsplash.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
+            <state relative-caret-position="495">
               <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
             </state>
           </provider>
@@ -130,7 +131,9 @@
       <find>imageOpacity</find>
       <find>map</find>
       <find>to</find>
+      <find>width</find>
       <find>contact_card</find>
+      <find>icon</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -163,7 +166,6 @@
         <option value="$PROJECT_DIR$/src/redux/reducers/places.ts" />
         <option value="$PROJECT_DIR$/src/configureStore.ts" />
         <option value="$PROJECT_DIR$/src/redux/actions.ts" />
-        <option value="$PROJECT_DIR$/src/api/here/fetch_place_details.ts" />
         <option value="$PROJECT_DIR$/src/redux/reducers.ts" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/api/unsplash/cred.ts" />
@@ -172,8 +174,10 @@
         <option value="$PROJECT_DIR$/src/api/here/fetch_places.ts" />
         <option value="$PROJECT_DIR$/src/routes/index.ts" />
         <option value="$PROJECT_DIR$/App.tsx" />
-        <option value="$PROJECT_DIR$/src/screens/landing_screen/index.tsx" />
         <option value="$PROJECT_DIR$/src/components/landing/place/place_card.tsx" />
+        <option value="$PROJECT_DIR$/src/api/here/fetch_place_details.ts" />
+        <option value="$PROJECT_DIR$/src/components/place_details/nearby_place.tsx" />
+        <option value="$PROJECT_DIR$/src/screens/landing_screen/index.tsx" />
         <option value="$PROJECT_DIR$/src/screens/place_details_screen/index.tsx" />
       </list>
     </option>
@@ -191,9 +195,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="148" />
     <option name="y" value="22" />
-    <option name="width" value="1292" />
+    <option name="width" value="1343" />
     <option name="height" value="878" />
   </component>
   <component name="ProjectView">
@@ -201,6 +204,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -252,8 +256,7 @@
               <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="landing" type="462c0819:PsiDirectoryNode" />
-              <item name="place" type="462c0819:PsiDirectoryNode" />
+              <item name="place_details" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
@@ -304,7 +307,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -321,6 +323,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/landing" />
       <recent name="$PROJECT_DIR$/src/api/here" />
       <recent name="$PROJECT_DIR$/src/components/landing/place" />
     </key>
@@ -359,24 +362,25 @@
       <workItem from="1568159342615" duration="2684000" />
       <workItem from="1568206106341" duration="10394000" />
       <workItem from="1568600361951" duration="10633000" />
-      <workItem from="1568683265128" duration="43281000" />
+      <workItem from="1568683265128" duration="53995000" />
+      <workItem from="1569043815537" duration="140000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115800000" />
+    <option name="totallyTimeSpent" value="126654000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="148" y="22" width="1292" height="878" extended-state="0" />
+    <frame x="0" y="22" width="1343" height="878" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48400852" visible="true" weight="0.2368" />
-      <window_info id="Structure" order="1" sideWeight="0.51599145" side_tool="true" weight="0.2018419" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.483165" visible="true" weight="0.19754036" />
+      <window_info id="Structure" order="1" sideWeight="0.51683503" side_tool="true" weight="0.1944658" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" sideWeight="0.5009488" side_tool="true" weight="0.22147651" />
+      <window_info id="Favorites" order="6" sideWeight="0.5177066" side_tool="true" weight="0.1944658" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32951653" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -388,7 +392,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32951653" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="TypeScript" order="10" weight="0.32951653" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.29007635" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.29262087" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -485,44 +489,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/actions/actions.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/reducers/place_details.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/reducers/places.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
-          <folding>
-            <element signature="e#0#200#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/redux/actions/actions.ts" />
+    <entry file="file://$PROJECT_DIR$/src/redux/reducers/place_details.ts" />
+    <entry file="file://$PROJECT_DIR$/src/redux/reducers/places.ts" />
     <entry file="file://$PROJECT_DIR$/src/configureStore.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="41" selection-start-line="1" selection-start-column="41" selection-end-line="1" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/place_details/place_title.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -547,13 +520,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/unsplash/cred.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.dom.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -561,56 +527,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/unsplash/fetch_photo.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="36" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="36" />
-          <folding>
-            <element signature="e#148#176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/unsplash/unsplash.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/here/fetch_place_details.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/here/cred.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="33" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/unsplash/fetch_photo.ts" />
     <entry file="file://$PROJECT_DIR$/App.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/here/fetch_places.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -625,27 +548,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/screens/landing_screen/index.tsx">
+    <entry file="file://$PROJECT_DIR$/src/components/place_details/nearby_place.tsx" />
+    <entry file="file://$PROJECT_DIR$/src/components/place_details/place_title.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-494">
-          <caret line="71" column="14" selection-start-line="71" selection-start-column="14" selection-end-line="71" selection-end-column="14" />
+        <state relative-caret-position="315">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/landing/place/place_card.tsx">
+    <entry file="file://$PROJECT_DIR$/src/api/here/fetch_place_details.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screens/landing_screen/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1710">
+          <caret line="130" column="36" selection-start-line="130" selection-start-column="36" selection-end-line="130" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/landing/place_card.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" column="14" selection-start-line="4" selection-end-line="5" />
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/here/fetch_places.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/unsplash/unsplash.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/unsplash/cred.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/here/cred.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="33" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/screens/place_details_screen/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="124" selection-start-line="124" selection-end-line="124" />
+        <state relative-caret-position="215">
+          <caret line="112" column="86" selection-start-line="112" selection-start-column="86" selection-end-line="112" selection-end-column="86" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

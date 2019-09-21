@@ -10,7 +10,7 @@ import {
     StatusBar,
     Text
 } from "react-native";
-import PlaceCard from "../../components/landing/place/place_card";
+import PlaceCard from "../../components/landing/place_card";
 import fetch_places from '../../api/here/fetch_places';
 import { getPlaces, getPlacesSuccess, getPlacesError } from '../../redux/reducers'
 import { bindActionCreators } from 'redux';
@@ -129,7 +129,6 @@ class LandingScreen extends React.Component<Props> {
                         }
                     >
                         {this._renderPlacesList(this.props)}
-                        {/*{data.results.items.map(item => <PlaceCard key={item.id} place_data={item} navigation={navigation} />)}*/}
                     </Animated.ScrollView>
                     <Animated.View
                         pointerEvents="none"

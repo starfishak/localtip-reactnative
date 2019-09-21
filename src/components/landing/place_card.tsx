@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, Image, StyleSheet, TouchableOpacity, WebView, Dimensions} from 'react-native';
 import {Card} from "react-native-elements";
-import {colors} from "../../../styles/theme";
+import {colors} from "../../styles/theme";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const PlaceCard = ({ place_data, navigation }) => {
