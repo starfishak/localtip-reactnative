@@ -1,16 +1,14 @@
 import React from "react";
 import {
-    Button,
     StyleSheet,
     Text,
     View,
     Image,
     ActivityIndicator,
     Dimensions,
-    FlatList,
-    WebView,
-    TouchableOpacity,
-    StatusBar, Linking, Platform, ScrollView
+    Linking,
+    Platform,
+    ScrollView,
 } from "react-native";
 import {ListItem} from "react-native-elements";
 import {getPlaceDetails, getPlaceDetailsSuccess, getPlaceDetailsError} from "../../redux/reducers";
@@ -18,7 +16,6 @@ import {bindActionCreators} from "redux";
 import fetch_place_details from "../../api/here/fetch_place_details";
 import { connect } from 'react-redux';
 import {colors} from "../../styles/theme";
-import {Card} from "react-native-elements";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FAB from 'react-native-fab'
 
@@ -31,12 +28,12 @@ type Props = {
     isFetching : boolean
 };
 
-type Data = {
-    data: object,
-    image : string
-    isFetching: boolean,
-    error: any
-}
+// type Data = {
+//     data: object,
+//     image : string
+//     isFetching: boolean,
+//     error: any
+// }
 
 class PlaceDetailsScreen extends React.Component<Props> {
     static navigationOptions = ({ navigation, navigationOptions }) => {
@@ -46,6 +43,7 @@ class PlaceDetailsScreen extends React.Component<Props> {
                 backgroundColor: navigationOptions.headerTintColor,
             },
             headerTintColor: navigationOptions.headerStyle.backgroundColor,
+
         };
     };
 

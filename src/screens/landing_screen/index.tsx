@@ -8,13 +8,14 @@ import {
     Platform,
     RefreshControl,
     StatusBar,
-    Text
+    Text, Button
 } from "react-native";
 import PlaceCard from "../../components/landing/place_card";
 import fetch_places from '../../api/here/fetch_places';
 import { getPlaces, getPlacesSuccess, getPlacesError } from '../../redux/reducers'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 /*
     Sources: Animated scroll header from Janic Duplessis
@@ -30,6 +31,19 @@ const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 
 class LandingScreen extends React.Component<Props> {
+    // static navigationOptions = ({ navigation, navigationOptions }) => {
+    //     return {
+    //         title: navigation.getParam('place_title'),
+    //         headerRight: (
+    //             <Icon
+    //             onPress={() => navigation.navigate()}
+    //             name="person"
+    //             color="#fff"
+    //             size={30}
+    //             />
+    //          )
+    //     };
+    // };
 
     constructor(props) {
         super(props);
@@ -42,9 +56,20 @@ class LandingScreen extends React.Component<Props> {
     }
 
     componentWillMount() {
-        this.props.fetchPlaces("-41.2907079,174.771661","1000");
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                let coords = position.coords.latitude + ',' + position.coords.longitude;
+                this.props.fetchPlaces(coords,"3000");
+            },
+            (error) => alert(error.message),
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        );
     }
 
+    /**
+     * Refresh method for getting new location and
+     * @private
+     */
     _refresh() {
         this.forceUpdate();
     }
