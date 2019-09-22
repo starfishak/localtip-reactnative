@@ -16,11 +16,18 @@ import { getPlaces, getPlacesSuccess, getPlacesError } from '../../redux/reducer
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+/*
+    Sources: Animated scroll header from Janic Duplessis
+    https://medium.com/appandflow/react-native-scrollview-animated-header-10a18cb9469e
+*/
+
 type Props = { fetchPlaces : Function, navigation : Navigator, data: Object, isFetching : boolean };
 type Data = {results : any}
 const HEADER_MAX_HEIGHT = 300;
 const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
+
+
 
 class LandingScreen extends React.Component<Props> {
 
@@ -28,16 +35,18 @@ class LandingScreen extends React.Component<Props> {
         super(props);
         this.state = {
             scrollY: new Animated.Value(
-                // iOS has negative initial scroll value because content inset...
                 Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
             ),
-            refreshing: false,
+            refreshing: false
         };
     }
 
     componentWillMount() {
-        console.log("about to fetch");
         this.props.fetchPlaces("-41.2907079,174.771661","1000");
+    }
+
+    _refresh() {
+        this.forceUpdate();
     }
 
     _renderPlacesList(props) {
@@ -121,6 +130,7 @@ class LandingScreen extends React.Component<Props> {
                                 refreshing={this.state.refreshing}
                                 onRefresh={() => {
                                     this.setState({ refreshing: true });
+                                    this._refresh();
                                     setTimeout(() => this.setState({ refreshing: false }), 1000);
                                 }}
                                 // Android offset for RefreshControl
@@ -211,7 +221,7 @@ const styles = StyleSheet.create({
     city_title: {
         color: 'white',
         fontSize: 18,
-        marginBottom: 5
+        marginBottom: 10
     },
     scrollViewContent: {
         // iOS uses content inset, which acts like padding.

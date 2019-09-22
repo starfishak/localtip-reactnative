@@ -46,13 +46,6 @@ class PlaceDetailsScreen extends React.Component<Props> {
                 backgroundColor: navigationOptions.headerTintColor,
             },
             headerTintColor: navigationOptions.headerStyle.backgroundColor,
-            // headerRight: (
-            //     <Button
-            //         onPress={() => this.props._open_navigation()}
-            //         title="Navigate"
-            //         color="#2A5E8D"
-            //     />
-            // ),
         };
     };
 
@@ -109,11 +102,37 @@ class PlaceDetailsScreen extends React.Component<Props> {
             // Render Other Components
             let phone_element = null;
             let website_element = null;
-            if (data.contacts.hasOwnProperty('phone')) {
-                website_element = <ListItem title={data.contacts.phone[0].value} leftElement={<Icon name="call" size={20} color="#2A5E8D"/>} onPress={() => {this._dialCall(data.contacts.phone[0].value)}}/>
+            let transit_departing = null;
+            console.log("Data: ",data.extended);
+            if (data.hasOwnProperty('contacts')) {
+                // If location has phone number
+                if (data.contacts.hasOwnProperty('phone')) {
+                    phone_element = <ListItem title={data.contacts.phone[0].value}
+                                              leftElement={<Icon name="call" size={20} color="#2A5E8D"/>}
+                                              onPress={() => {
+                                                  this._dialCall(data.contacts.phone[0].value)
+                                              }}/>
+                }
+                // If location has website
+                if (data.contacts.hasOwnProperty('website')) {
+                    website_element = <ListItem title={data.contacts.website[0].value}
+                                                leftElement={<Icon name="web" size={20} color="#2A5E8D"/>}
+                                                onPress={() => {
+                                                    this._openUrl(data.contacts.website[0].value)
+                                                }}/>
+                }
             }
-            if (data.contacts.hasOwnProperty('website')) {
-                website_element = <ListItem title={data.contacts.website[0].value} leftElement={<Icon name="call" size={20} color="#2A5E8D"/>} onPress={() => {this._openUrl(data.contacts.website[0].value)}}/>
+
+            // Create Address Card
+            const address_str = data.location.address.street + ', ' + data.location.address.city + ' ' + data.location.address.postalCode;
+            let address_element = <ListItem
+                                    title={address_str}
+                                    leftElement={<Icon name="directions" size={20} color="#2A5E8D"/>}
+                                    onPress={() => {this._open_navigation(data.location.position)}}/>;
+
+            // Transit
+            if (data.isTransit) {
+                transit_departing = <Text style={styles.place_title}>Departing Soon</Text>
             }
 
             return (
@@ -127,27 +146,52 @@ class PlaceDetailsScreen extends React.Component<Props> {
                         <View style={styles.text_container}>
                             <Text style={styles.place_title}>{data['name']}</Text>
                             {data['categories'].map(item => <Text key={item.id} style={styles.place_category}>{item.title}</Text>)}
+                            {address_element}
                             {phone_element}
                             {website_element}
+                            {transit_departing}
+                            {
+                                data['departures'].map((item) => (
+                                    <ListItem title={item.direction}
+                                              subtitle={'Line ' + item.line}
+                                              rightElement={<Text>{item.time}</Text>}
+                                    />
+                                ))
+                            }
                             <Text style={styles.place_title}>Recommended Nearby</Text>
                                 {
                                     data['nearby'].map((item) => (
-                                            <ListItem
-                                                key={item.id}
-                                                title={item.title}
-                                                subtitle={item.category.title}
-                                                leftAvatar={{ source: { uri: item.icon } }}
-                                                onPress={() => {
-                                                    navigation.push('Details',
-                                                        {id: item.id, place_title:item.title})
-                                                }}
-                                                rightElement={
-                                                    <Icon name="arrow_right" color="#2A5E8D" />
-                                                }
-                                            />
+                                        <ListItem
+                                            key={item.id}
+                                            title={item.title}
+                                            subtitle={item.category.title + ' | ' + item.distance + ' m'}
+                                            onPress={() => {
+                                                navigation.push('Details',
+                                                    {id: item.id, place_title:item.title})
+                                            }}
+                                            rightIcon={
+                                                <Icon name="search" color="#2A5E8D" />
+                                            }
+                                        />
                                     ))
                                 }
-                            {/*{data['nearby'].map(item => <NearbyPlaceCard key={item.id} place_data={item} navigation={navigation} style={styles.nearby_card}/>)}*/}
+                            <Text style={styles.place_title}>Transit Nearby</Text>
+                                {
+                                    data['transit'].map((item) => (
+                                        <ListItem
+                                            key={item.id}
+                                            title={item.title}
+                                            subtitle={item.category.title + ' | ' + item.distance + ' m'}
+                                            onPress={() => {
+                                                navigation.push('Details',
+                                                    {id: item.id, place_title:item.title})
+                                            }}
+                                            rightIcon={
+                                                <Icon name="search" color="#2A5E8D" />
+                                            }
+                                        />
+                                    ))
+                                }
                         </View>
                     </ScrollView>
                     <FAB buttonColor="#2A5E8D" iconTextColor="white" onClickAction={() => {this._open_navigation(data.location.position)}} visible={true} iconTextComponent={<Icon name="directions"/>} />

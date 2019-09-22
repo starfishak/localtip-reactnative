@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee06b17b-cbaa-47b5-b285-45ab1de68b72" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/here/fetch_place_details.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/here/fetch_place_details.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/landing/place/place_card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/landing/place_card.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/landing_screen/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/landing_screen/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/place_details_screen/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/place_details_screen/index.tsx" afterDir="false" />
     </list>
@@ -16,6 +12,20 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
@@ -28,8 +38,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/here/fetch_place_details.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+            <state relative-caret-position="-21">
+              <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -40,8 +50,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/screens/place_details_screen/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="112" column="86" selection-start-line="112" selection-start-column="86" selection-end-line="112" selection-end-column="86" />
+            <state relative-caret-position="2188">
+              <caret line="196" column="156" selection-start-line="196" selection-start-column="156" selection-end-line="196" selection-end-column="156" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -52,11 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/screens/landing_screen/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1710">
-              <caret line="130" column="36" selection-start-line="130" selection-start-column="36" selection-end-line="130" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-108">
+              <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -134,6 +141,9 @@
       <find>width</find>
       <find>contact_card</find>
       <find>icon</find>
+      <find>header_max</find>
+      <find>transi</find>
+      <find>HEADER_MAX_HEIGHT</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -175,10 +185,10 @@
         <option value="$PROJECT_DIR$/src/routes/index.ts" />
         <option value="$PROJECT_DIR$/App.tsx" />
         <option value="$PROJECT_DIR$/src/components/landing/place/place_card.tsx" />
-        <option value="$PROJECT_DIR$/src/api/here/fetch_place_details.ts" />
         <option value="$PROJECT_DIR$/src/components/place_details/nearby_place.tsx" />
-        <option value="$PROJECT_DIR$/src/screens/landing_screen/index.tsx" />
+        <option value="$PROJECT_DIR$/src/api/here/fetch_place_details.ts" />
         <option value="$PROJECT_DIR$/src/screens/place_details_screen/index.tsx" />
+        <option value="$PROJECT_DIR$/src/screens/landing_screen/index.tsx" />
       </list>
     </option>
   </component>
@@ -196,7 +206,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="22" />
-    <option name="width" value="1343" />
+    <option name="width" value="1347" />
     <option name="height" value="878" />
   </component>
   <component name="ProjectView">
@@ -217,91 +227,6 @@
               <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
               <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="here" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="unsplash" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="landing" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="place_details" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="redux" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="screens" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="screens" type="462c0819:PsiDirectoryNode" />
-              <item name="interests_screen" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="screens" type="462c0819:PsiDirectoryNode" />
-              <item name="landing_screen" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="screens" type="462c0819:PsiDirectoryNode" />
-              <item name="place_details_screen" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LocalTip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LocalTip" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="styles" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -363,19 +288,19 @@
       <workItem from="1568206106341" duration="10394000" />
       <workItem from="1568600361951" duration="10633000" />
       <workItem from="1568683265128" duration="53995000" />
-      <workItem from="1569043815537" duration="140000" />
+      <workItem from="1569043815537" duration="9224000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126654000" />
+    <option name="totallyTimeSpent" value="135738000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1343" height="878" extended-state="0" />
+    <frame x="0" y="22" width="1347" height="878" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.483165" visible="true" weight="0.19754036" />
-      <window_info id="Structure" order="1" sideWeight="0.51683503" side_tool="true" weight="0.1944658" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48125" visible="true" weight="0.19693486" />
+      <window_info id="Structure" order="1" sideWeight="0.51875" side_tool="true" visible="true" weight="0.19693486" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -392,7 +317,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32951653" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="TypeScript" order="10" weight="0.32951653" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.29262087" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.18575063" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -402,7 +327,7 @@
       <window_info anchor="right" id="Maven" order="5" weight="0.32949513" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="right" id="Database" order="8" weight="0.32974634" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48400852" visible="true" weight="0.2562674" />
@@ -559,33 +484,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/here/fetch_place_details.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/screens/landing_screen/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1710">
-          <caret line="130" column="36" selection-start-line="130" selection-start-column="36" selection-end-line="130" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/landing/place_card.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/api/here/fetch_places.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -617,10 +515,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/react/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="442" column="8" selection-start-line="442" selection-start-column="8" selection-end-line="442" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/here/fetch_place_details.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-21">
+          <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screens/landing_screen/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-108">
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/landing/place_card.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/screens/place_details_screen/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="112" column="86" selection-start-line="112" selection-start-column="86" selection-end-line="112" selection-end-column="86" />
+        <state relative-caret-position="2188">
+          <caret line="196" column="156" selection-start-line="196" selection-start-column="156" selection-end-line="196" selection-end-column="156" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
