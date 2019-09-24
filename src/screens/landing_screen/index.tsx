@@ -116,7 +116,6 @@ class LandingScreen extends React.Component<Props> {
     /**
      * Render method for the screen.
      * Renders different if the data is being fetched. If so, the spinner icon is returned to the screen.
-     *
      */
     render() {
         const {isFetching, data} = this.props;

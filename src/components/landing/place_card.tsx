@@ -1,8 +1,15 @@
 import React from 'react';
-import {Text, View, Image, StyleSheet, TouchableOpacity, WebView, Dimensions} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import {Card} from "react-native-elements";
 import {colors} from "../../styles/theme";
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+/**
+ * Place card component. Used on homepage list of nearby places
+ * @param place_data data payload with all place information
+ * @param navigation object with navigation router information. Used for touchable opacity router options
+ * @constructor
+ */
 
 const PlaceCard = ({ place_data, navigation }) => {
     return (
@@ -28,6 +35,9 @@ const PlaceCard = ({ place_data, navigation }) => {
 
 export default PlaceCard;
 
+/**
+ * Stylesheets
+ */
 const win = Dimensions.get('window').width;
 const styles = StyleSheet.create({
     place_title: {
@@ -64,13 +74,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
     },
     icons : {
-        // paddingLeft: 5,
-        // paddingRight: 5,
         justifyContent: 'center'
     },
     info_text: {
-        // alignSelf: 'flex-start',
-        // justifyContent: 'center'
         paddingLeft: 15
     }
 });

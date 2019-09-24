@@ -5,7 +5,7 @@ import {colors} from "../../styles/theme";
 
 /**
  * Interest card for users preferences. Includes button with two states, "Yes" or "No"
- * @param data
+ * @param data payload for the interest, including images, options, etc.
  * @constructor
  */
 const InterestCard = ({ data }) => {
