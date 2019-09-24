@@ -8,7 +8,8 @@ import {
     Platform,
     RefreshControl,
     StatusBar,
-    Text, Dimensions
+    Text,
+    Dimensions
 } from "react-native";
 import PlaceCard from "../../components/landing/place_card";
 import fetch_places from '../../api/here/fetch_places';
@@ -16,24 +17,29 @@ import { getPlaces, getPlacesSuccess, getPlacesError } from '../../redux/reducer
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { RNChipView } from 'react-native-chip-view'
 
 
-/*
-    Sources: Animated scroll header from Janic Duplessis
-    https://medium.com/appandflow/react-native-scrollview-animated-header-10a18cb9469e
-*/
+/**
+*    Sources: Animated scroll header from Janic Duplessis
+*    https://medium.com/appandflow/react-native-scrollview-animated-header-10a18cb9469e
+**/
 
+/**
+ * Header Constants / Types for TS - Provided by Janic Duplessis
+ */
 type Props = { fetchPlaces : Function, navigation : Navigator, data: Object, isFetching : boolean };
-type Data = {results : any}
 const HEADER_MAX_HEIGHT = 300;
 const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
-
-
 class LandingScreen extends React.Component<Props> {
-    static navigationOptions = ({ navigation, navigationOptions }) => {
+    /**
+     * Navigation and status bar options for React Navigation
+     * Used to add status bar
+     *
+     * @param navigation navigation object
+     */
+    static navigationOptions = ({ navigation }) => {
         return {
             title: navigation.getParam('place_title'),
             headerRight: (
@@ -47,6 +53,10 @@ class LandingScreen extends React.Component<Props> {
         };
     };
 
+    /**
+     * Sets up the initial props and state
+     * State set up for the animated scroll
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -57,6 +67,9 @@ class LandingScreen extends React.Component<Props> {
         };
     }
 
+    /**
+     * Gets location and retrieves nearby places
+     */
     componentWillMount() {
         navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -69,13 +82,20 @@ class LandingScreen extends React.Component<Props> {
     }
 
     /**
-     * Refresh method for getting new location and
+     * Refresh method for the page; calls rerender including location refresh
      * @private
      */
     _refresh() {
         this.forceUpdate();
     }
 
+    /**
+     * Method for rendering the Flatlist of places
+     * Keeps code clean and less cluttered
+     *
+     * @param props
+     * @private
+     */
     _renderPlacesList(props) {
         const navigation = props.navigation;
         const data = props.data;
@@ -93,32 +113,23 @@ class LandingScreen extends React.Component<Props> {
         )
     }
 
-    _renderFilterChips() {
-        return(
-            <RNChipView
-                title={'Filter'}
-                onPress={() => {alert('Works!')}}
-                // avatar={<Icon
-                //     name="person"
-                //     color="#fff"
-                // />}
-            />
-        )
-    }
-
+    /**
+     * Render method for the screen.
+     * Renders different if the data is being fetched. If so, the spinner icon is returned to the screen.
+     *
+     */
     render() {
-        // @ts-ignore
-        const {isFetching, data, navigation} = this.props;
+        const {isFetching, data} = this.props;
         console.log("isFetching: ", isFetching);
         if(isFetching) {
             return(
-                <View style={{flex: 1, flexDirplacesReducerection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+                <View style={styles.spinner}>
                     <ActivityIndicator size={'large'} />
                 </View>
             )
         }
         else {
-            console.log("Data success. returning flatlist.")
+            // Animation constants - variables and set up provided by Janic Duplessis, referenced above
             const scrollY = Animated.add(
                 this.state.scrollY,
                 Platform.OS === 'ios' ? HEADER_MAX_HEIGHT : 0,
@@ -150,13 +161,17 @@ class LandingScreen extends React.Component<Props> {
                 outputRange: [0, 0, -8],
                 extrapolate: 'clamp',
             });
+
+            // Rendering of page
             return(
                 <View style={styles.fill}>
+                    {/*Header bar for the location*/}
                     <StatusBar
                         translucent
                         barStyle="light-content"
                         backgroundColor="rgba(0, 0, 0, 0.251)"
                     />
+                    {/*Scroll view for the places list - includes the refresh control to update location*/}
                     <Animated.ScrollView
                         style={styles.fill}
                         scrollEventThrottle={1}
@@ -177,8 +192,10 @@ class LandingScreen extends React.Component<Props> {
                             />
                         }
                     >
+                        {/*Get a list of places to place in this scrollview - Makes code cleaner when seperated*/}
                         {this._renderPlacesList(this.props)}
                     </Animated.ScrollView>
+                    {/*Views for the header image*/}
                     <Animated.View
                         pointerEvents="none"
                         style={[
@@ -197,6 +214,7 @@ class LandingScreen extends React.Component<Props> {
                             source={{uri:data.header_image.url}}
                         />
                     </Animated.View>
+                    {/*Views for the status bar where the location information is overlayed - scales the font size down*/}
                     <Animated.View
                         style={[
                             styles.bar,
@@ -208,6 +226,7 @@ class LandingScreen extends React.Component<Props> {
                             },
                         ]}
                     >
+                        {/*Where the location text is rendered*/}
                         <Text style={styles.title}>{data.search.context.location.address.district}</Text>
                         <Text style={styles.city_title}>{data.search.context.location.address.city}</Text>
                     </Animated.View>
@@ -217,6 +236,9 @@ class LandingScreen extends React.Component<Props> {
     };
 }
 
+/**
+ * Styles for the page
+ */
 const styles = StyleSheet.create({
     fill: {
         flex: 1,
@@ -244,7 +266,7 @@ const styles = StyleSheet.create({
     },
     bar: {
         backgroundColor: 'transparent',
-        marginTop: Platform.OS === 'ios' ? 28 : 38,
+        marginTop: Platform.OS === 'ios' ? 28 : 38, // IOS specific settings
         height: 32,
         alignItems: 'center',
         justifyContent: 'center',
@@ -263,7 +285,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     scrollViewContent: {
-        // iOS uses content inset, which acts like padding.
+        // IOS uses content inset, which acts like padding.
         paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0,
         width: (Dimensions.get('window').width)
     },
@@ -274,17 +296,38 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    spinner : {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'}
 });
 
+/**
+ * Redux: Is called whenever the store updates with a new state
+ * https://react-redux.js.org/using-react-redux/connect-mapstate
+ * Used as a parameter in the connect method below
+ *
+ * @param state supplied from the store
+ */
 const mapStateToProps = (state) => ({
     isFetching: getPlaces(state),
     data: getPlacesSuccess(state),
     error: getPlacesError(state)
 });
 
+/**
+ * Redux: Method used to dispatch actions to the store
+ * Used as a parameter in the connect method below
+ * https://react-redux.js.org/using-react-redux/connect-mapdispatch
+ *
+ * @param dispatch
+ */
 const mapDispatchToProps = dispatch => bindActionCreators({
     fetchPlaces: fetch_places
 }, dispatch);
 
-
+/**
+ * Connect supplied via Redux
+ */
 export default connect(mapStateToProps, mapDispatchToProps)(LandingScreen)

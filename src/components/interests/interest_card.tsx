@@ -1,9 +1,13 @@
 import React from 'react';
-import {Text, View, Image, StyleSheet, TouchableOpacity, WebView, Dimensions} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import {ButtonGroup, Card} from "react-native-elements";
 import {colors} from "../../styles/theme";
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
+/**
+ * Interest card for users preferences. Includes button with two states, "Yes" or "No"
+ * @param data
+ * @constructor
+ */
 const InterestCard = ({ data }) => {
     const buttons = ['Yes', 'No'];
     let selected = 0;
@@ -26,6 +30,11 @@ const InterestCard = ({ data }) => {
 
 export default InterestCard;
 
+
+/**
+ * Styles
+ * win -> dimensions of the screen for responsive elements
+ */
 const win = Dimensions.get('window').width;
 const styles = StyleSheet.create({
     place_title: {
@@ -62,13 +71,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
     },
     icons : {
-        // paddingLeft: 5,
-        // paddingRight: 5,
         justifyContent: 'center'
     },
     info_text: {
-        // alignSelf: 'flex-start',
-        // justifyContent: 'center'
         paddingLeft: 15
     }
 });

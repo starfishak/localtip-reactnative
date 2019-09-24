@@ -185,7 +185,7 @@ class PlaceDetailsScreen extends React.Component<Props> {
                                                     {id: item.id, place_title:item.title})
                                             }}
                                             rightIcon={
-                                                <Icon name="search" color="#2A5E8D" />
+                                                <Icon name="play-arrow" color="#2A5E8D" />
                                             }
                                         />
                                     ))

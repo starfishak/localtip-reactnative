@@ -1,33 +1,39 @@
 import React from "react";
-import {Dimensions, FlatList, ScrollView, StyleSheet, Text, View} from "react-native";
+import {ActivityIndicator, Dimensions, FlatList, ScrollView, StyleSheet, Text, View} from "react-native";
 import InterestCard from "../../components/interests/interest_card";
-import {getPreferenceList, newUser, initUser} from "../../api/interest/interests"
+import getPrefList from "../../api/interest/interests"
+import {
+    getInterests,
+    getInterestsError,
+    getInterestsSuccess
+} from "../../redux/reducers";
+import {bindActionCreators} from "redux";
+import { connect } from 'react-redux';
+
+/**
+ * NB: This screen did not work as expected by the project deadline.
+ * More information is available under src/api/interests/interests.ts
+ */
 
 class InterestsScreen extends React.Component {
 
-    async _renderInterestList(props) {
-        const navigation = props.navigation;
-        let data = [];
-        // newUser().then(
-        //     async res => {
-        //         if (res) {
-        //             console.log("New User");
-        //             await initUser()
-        //         }
-        //     }
-        // ).then(
-        //     async res => {
-        //         console.log("getting data");
-        //         data = await getPreferenceList();
-        //     }
-        // );
+    constructor(props) {
+        super(props);
+    }
 
-        data = await getPreferenceList().then(
-            res => {
-                console.log("res2",res);
-            }
-        );
+    /**
+     * Data retrieval from get Preference List in the Interest API
+     */
+    componentWillMount() {
+        this.props.getPrefList()
 
+    }
+
+    /**
+     * Screen Render Method
+     */
+    render() {
+        // Type for expected card type and properties
         type Item = {
             id : string,
             image : string,
@@ -35,30 +41,36 @@ class InterestsScreen extends React.Component {
             photographer : string,
             active : boolean
         }
-        return (
-            <View style={styles.scrollViewContent}>
-                <FlatList
-                    data={data}
-                    renderItem={({ item }) => <InterestCard data={item}/>}
-                    keyExtractor={(item : Item) => item.id}
-                    scrollEnabled={false}
-                />
-            </View>
-        )
-    }
 
-    render() {
-        const {navigation: navigation} = this.props;
-        return (
-            <View style={styles.container}>
-                <ScrollView>
-                    {this._renderInterestList(this.props)}
-                </ScrollView>
-            </View>
-        );
+        const {data, isFetching} = this.props;
+        // If loading, return spinner view
+        if (isFetching) {
+            return(
+                <View style={styles.spinner}>
+                    <ActivityIndicator size={'large'} />
+                </View>
+            )
+        }
+        else {
+            return (
+                <View style={styles.container}>
+                    <ScrollView>
+                        <FlatList
+                            data={data}
+                            renderItem={(item) => <InterestCard data={item}/>}
+                            keyExtractor={(item: Item) => item.id}
+                            scrollEnabled={false}
+                        />
+                    </ScrollView>
+                </View>
+            );
+        }
     };
 }
 
+/**
+ * Stylesheet
+ */
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -68,7 +80,40 @@ const styles = StyleSheet.create({
     },
     scrollViewContent : {
         width: (Dimensions.get('window').width)
+    },
+    spinner : {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 
-export default InterestsScreen;
+/**
+ * Redux: Is called whenever the store updates with a new state
+ * https://react-redux.js.org/using-react-redux/connect-mapstate
+ * Used as a parameter in the connect method below
+ *
+ * @param state supplied from the store
+ */
+const mapStateToProps = (state) => ({
+    isFetching: getInterests(state),
+    data: getInterestsSuccess(state),
+    error: getInterestsError(state)
+});
+
+/**
+ * Redux: Method used to dispatch actions to the store
+ * Used as a parameter in the connect method below
+ * https://react-redux.js.org/using-react-redux/connect-mapdispatch
+ *
+ * @param dispatch
+ */
+const mapDispatchToProps = dispatch => bindActionCreators({
+    getPrefList: getPrefList
+}, dispatch);
+
+/**
+ * Connect supplied via Redux
+ */
+export default connect(mapStateToProps, mapDispatchToProps)(InterestsScreen)

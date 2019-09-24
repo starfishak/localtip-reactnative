@@ -1,5 +1,11 @@
 import {AsyncStorage} from 'react-native';
 import Categories from "./categories";
+import {getInterests, getInterestsSuccess, getInterestFailure} from "../../redux/actions";
+
+/**
+ * NB: This feature did not work as expected by the project deadline.
+ * The code is here but has no effect on the final application.
+ */
 
 /**
  * Checks if a user is new, i.e. is user never opened app before
@@ -9,42 +15,56 @@ export function newUser() {
     // checks if user is new
     return AsyncStorage.getAllKeys().then(
         res => {
-            console.log(res)
-            // return !(length(res) > 0);
+            console.log(res);
+            return !(res.length > 0);
         }
     )
 }
 
-
+/**
+ * Called if the user is new. Initiates the users preferences to the default settings.
+ */
 export function initUser() {
-    for (let category in Categories) {
-        console.log("Setting", category);
-        AsyncStorage.setItem(Categories[category].id, Categories[category])
+    let kv_pairs = [];
+    for (let [key, value] of Object.entries(Categories)) {
+        kv_pairs.push([key, value])
+    }
+    console.log(kv_pairs);
+    AsyncStorage.multiSet(kv_pairs);
+    console.log('init complete')
+}
+
+/**
+ * Gets the users current known preferences and dispatches them to screen via redux
+ */
+export function getPreferenceList() {
+    return async (dispatch) => {
+        dispatch(getInterests());
+        await initUser();
+        const preference_list = [];
+        console.log("in the then statement");
+        Promise.all([
+                AsyncStorage.getAllKeys()
+                    .then(keys => {
+                        console.log("keys", keys);
+                            keys.map(key => {
+                                console.log(key);
+                                    AsyncStorage.getItem(key).then(
+                                        value => {
+                                            preference_list.push([key, value])
+                                            console.log(preference_list)
+                                        }
+                                    )
+                                }
+                            )
+                        }
+                    )
+            ]
+        ).then(
+            () => {return preference_list;}
+        )
     }
 }
 
-export async function getPreferenceList() {
-    await initUser();
-    const preference_list = [];
-
-    console.log(AsyncStorage);
-
-     return AsyncStorage.getAllKeys((err, keys) => {
-        console.log(keys);
-        AsyncStorage.multiGet(keys, (err, stores) => {
-            stores.map((result, i, store) => {
-                let key = result[i][0];
-                console.log(key)
-                let value = result[i][1];
-                preference_list.push(value);
-            });
-        }).then(
-            (res) => {
-                console.log("res,",res);
-                return preference_list
-            }
-        );
-    });
-}
-
+export default getPreferenceList;
 
