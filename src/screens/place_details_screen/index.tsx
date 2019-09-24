@@ -10,7 +10,7 @@ import {
     Platform,
     ScrollView,
 } from "react-native";
-import {ListItem} from "react-native-elements";
+import {Card, ListItem} from "react-native-elements";
 import {getPlaceDetails, getPlaceDetailsSuccess, getPlaceDetailsError} from "../../redux/reducers";
 import {bindActionCreators} from "redux";
 import fetch_place_details from "../../api/here/fetch_place_details";
@@ -105,28 +105,30 @@ class PlaceDetailsScreen extends React.Component<Props> {
             if (data.hasOwnProperty('contacts')) {
                 // If location has phone number
                 if (data.contacts.hasOwnProperty('phone')) {
-                    phone_element = <ListItem title={data.contacts.phone[0].value}
+                    phone_element = <Card
+                        // title={data.contacts.phone[0].value}
                                               leftElement={<Icon name="call" size={20} color="#2A5E8D"/>}
                                               onPress={() => {
                                                   this._dialCall(data.contacts.phone[0].value)
-                                              }}/>
+                                              }}><Text>{data.contacts.phone[0].value}</Text></Card>
                 }
                 // If location has website
                 if (data.contacts.hasOwnProperty('website')) {
-                    website_element = <ListItem title={data.contacts.website[0].value}
+                    website_element = <Card
+                        // title={data.contacts.website[0].value}
                                                 leftElement={<Icon name="web" size={20} color="#2A5E8D"/>}
                                                 onPress={() => {
                                                     this._openUrl(data.contacts.website[0].value)
-                                                }}/>
+                                                }}><Text>{data.contacts.website[0].value}</Text></Card>
                 }
             }
 
             // Create Address Card
             const address_str = data.location.address.street + ', ' + data.location.address.city + ' ' + data.location.address.postalCode;
-            let address_element = <ListItem
-                                    title={address_str}
+            let address_element = <Card
+                                    // title={address_str}
                                     leftElement={<Icon name="directions" size={20} color="#2A5E8D"/>}
-                                    onPress={() => {this._open_navigation(data.location.position)}}/>;
+                                    onPress={() => {this._open_navigation(data.location.position)}}><Text>{address_str}</Text></Card>;
 
             // Transit
             if (data.isTransit) {
