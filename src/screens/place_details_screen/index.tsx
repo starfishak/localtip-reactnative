@@ -28,13 +28,9 @@ type Props = {
     isFetching : boolean
 };
 
-// type Data = {
-//     data: object,
-//     image : string
-//     isFetching: boolean,
-//     error: any
-// }
-
+/**
+ * Places Details Screen
+ */
 class PlaceDetailsScreen extends React.Component<Props> {
     static navigationOptions = ({ navigation, navigationOptions }) => {
         return {
@@ -47,19 +43,26 @@ class PlaceDetailsScreen extends React.Component<Props> {
         };
     };
 
+    /**
+     * Gets the place information, including header map and transit information. State managed with Redux.
+     */
     componentWillMount() {
         const {navigation: navigation} = this.props;
         const place_id = navigation.getParam('id');
-        console.log("place_id", place_id);
         this.props.fetchPlaceDetails(place_id);
         this.render();
     }
 
+    /**
+     * Open a URL provided in the default browser. Check if it is a legit URL.
+     * @param url URL to be checked and opened
+     * @private
+     */
     _openUrl = (url) => {
         Linking.canOpenURL(url)
             .then((supported) => {
                 if (!supported) {
-                    console.log("Can't handle url: " + url);
+                    throw new Error("URL Not Supported");
                 } else {
                     return Linking.openURL(url);
                 }
@@ -67,8 +70,12 @@ class PlaceDetailsScreen extends React.Component<Props> {
             .catch((err) => console.error('An error occurred', err));
     };
 
-
-    _dialCall = (phone) => {
+    /**
+     * Opens system default to make a phone call with the provided number
+     * @param phone phone number to call in string form
+     * @private
+     */
+    _dialCall = (phone : string) => {
         let phoneNumber = '';
         if (Platform.OS === 'android') {
             phoneNumber = `tel:${phone}`;
@@ -80,18 +87,25 @@ class PlaceDetailsScreen extends React.Component<Props> {
         Linking.openURL(phoneNumber);
     };
 
+    /**
+     * Opens default mapping application to search a provided coordinate location
+     * @param position array of position in format: [LAT, LONG]
+     * @private
+     */
     _open_navigation = (position) => {
         let url = "https://www.google.com/maps/search/?api=1&query=" + position[0] + ',' + position[1];
         this._openUrl(url);
     };
 
+    /**
+     * Renders Screen Components
+     * If the page is fetching, it returns a spinner screen.
+     */
     render() {
         const {isFetching, navigation, data} = this.props;
-        console.log("image:",data.image,isFetching);
-        console.log("title:", navigation.getParam('place_title'));
         if(isFetching) {
             return(
-                <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+                <View style={styles.spinner}>
                     <ActivityIndicator size={'large'} />
                 </View>
             )
@@ -101,7 +115,6 @@ class PlaceDetailsScreen extends React.Component<Props> {
             let phone_element = null;
             let website_element = null;
             let transit_departing = null;
-            console.log("Data: ",data.extended);
             if (data.hasOwnProperty('contacts')) {
                 // If location has phone number
                 if (data.contacts.hasOwnProperty('phone')) {
@@ -192,6 +205,7 @@ class PlaceDetailsScreen extends React.Component<Props> {
                                 }
                         </View>
                     </ScrollView>
+                    {/*FAB Button for Navigation*/}
                     <FAB buttonColor="#2A5E8D" iconTextColor="white" onClickAction={() => {this._open_navigation(data.location.position)}} visible={true} iconTextComponent={<Icon name="directions"/>} />
                 </View>
             );
@@ -199,6 +213,10 @@ class PlaceDetailsScreen extends React.Component<Props> {
     };
 }
 
+/**
+ * Stylesheets
+ * win = window dimensions for stylesheet
+ */
 const win = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
@@ -260,17 +278,40 @@ const styles = StyleSheet.create({
     nearby_card : {
         elevation:0,
         width: win.width
+    },
+    spinner : {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 
+/**
+ * Redux: Is called whenever the store updates with a new state
+ * https://react-redux.js.org/using-react-redux/connect-mapstate
+ * Used as a parameter in the connect method below
+ *
+ * @param state supplied from the store
+ */
 const mapStateToProps = (state) => ({
     isFetching: getPlaceDetails(state),
     data: getPlaceDetailsSuccess(state),
     error: getPlaceDetailsError(state),
 });
 
+/**
+ * Redux: Method used to dispatch actions to the store
+ * Used as a parameter in the connect method below
+ * https://react-redux.js.org/using-react-redux/connect-mapdispatch
+ *
+ * @param dispatch
+ */
 const mapDispatchToProps = dispatch => bindActionCreators({
     fetchPlaceDetails: fetch_place_details
 }, dispatch);
 
+/**
+ * Connect supplied via Redux
+ */
 export default connect(mapStateToProps, mapDispatchToProps)(PlaceDetailsScreen)
