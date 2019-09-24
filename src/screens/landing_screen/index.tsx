@@ -8,7 +8,7 @@ import {
     Platform,
     RefreshControl,
     StatusBar,
-    Text, Button
+    Text, Dimensions
 } from "react-native";
 import PlaceCard from "../../components/landing/place_card";
 import fetch_places from '../../api/here/fetch_places';
@@ -16,6 +16,8 @@ import { getPlaces, getPlacesSuccess, getPlacesError } from '../../redux/reducer
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { RNChipView } from 'react-native-chip-view'
+
 
 /*
     Sources: Animated scroll header from Janic Duplessis
@@ -31,19 +33,19 @@ const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 
 class LandingScreen extends React.Component<Props> {
-    // static navigationOptions = ({ navigation, navigationOptions }) => {
-    //     return {
-    //         title: navigation.getParam('place_title'),
-    //         headerRight: (
-    //             <Icon
-    //             onPress={() => navigation.navigate()}
-    //             name="person"
-    //             color="#fff"
-    //             size={30}
-    //             />
-    //          )
-    //     };
-    // };
+    static navigationOptions = ({ navigation, navigationOptions }) => {
+        return {
+            title: navigation.getParam('place_title'),
+            headerRight: (
+                <Icon
+                onPress={() => navigation.navigate('Interests')}
+                name="person"
+                color="#fff"
+                size={30}
+                />
+             )
+        };
+    };
 
     constructor(props) {
         super(props);
@@ -76,7 +78,6 @@ class LandingScreen extends React.Component<Props> {
 
     _renderPlacesList(props) {
         const navigation = props.navigation;
-        console.log(navigation);
         const data = props.data;
         type Item = {
             id : string
@@ -89,6 +90,19 @@ class LandingScreen extends React.Component<Props> {
                     keyExtractor={(item : Item) => item.id}
                 />
             </View>
+        )
+    }
+
+    _renderFilterChips() {
+        return(
+            <RNChipView
+                title={'Filter'}
+                onPress={() => {alert('Works!')}}
+                // avatar={<Icon
+                //     name="person"
+                //     color="#fff"
+                // />}
+            />
         )
     }
 
@@ -251,6 +265,7 @@ const styles = StyleSheet.create({
     scrollViewContent: {
         // iOS uses content inset, which acts like padding.
         paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0,
+        width: (Dimensions.get('window').width)
     },
     row: {
         height: 40,
