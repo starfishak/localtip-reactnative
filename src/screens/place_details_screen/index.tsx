@@ -152,15 +152,15 @@ class PlaceDetailsScreen extends React.Component<Props> {
                             {address_element}
                             {phone_element}
                             {website_element}
-                            {transit_departing}
-                            {
-                                data['departures'].map((item) => (
-                                    <ListItem title={item.direction}
-                                              subtitle={'Line ' + item.line}
-                                              rightElement={<Text>{item.time}</Text>}
-                                    />
-                                ))
-                            }
+                            {/*{transit_departing}*/}
+                            {/*{*/}
+                            {/*    data['departures'].map((item) => (*/}
+                            {/*        <ListItem title={item.direction}*/}
+                            {/*                  subtitle={'Line ' + item.line}*/}
+                            {/*                  rightElement={<Text>{item.time}</Text>}*/}
+                            {/*        />*/}
+                            {/*    ))*/}
+                            {/*}*/}
                             <Text style={styles.place_title}>Recommended Nearby</Text>
                                 {
                                     data['nearby'].map((item) => (
