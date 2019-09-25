@@ -105,30 +105,30 @@ class PlaceDetailsScreen extends React.Component<Props> {
             if (data.hasOwnProperty('contacts')) {
                 // If location has phone number
                 if (data.contacts.hasOwnProperty('phone')) {
-                    phone_element = <Card
-                        // title={data.contacts.phone[0].value}
+                    phone_element = <ListItem
+                        title={data.contacts.phone[0].value}
                                               leftElement={<Icon name="call" size={20} color="#2A5E8D"/>}
                                               onPress={() => {
                                                   this._dialCall(data.contacts.phone[0].value)
-                                              }}><Text>{data.contacts.phone[0].value}</Text></Card>
+                                              }}><Text>{data.contacts.phone[0].value}</Text></ListItem>
                 }
                 // If location has website
                 if (data.contacts.hasOwnProperty('website')) {
-                    website_element = <Card
-                        // title={data.contacts.website[0].value}
+                    website_element = <ListItem
+                        title={data.contacts.website[0].value}
                                                 leftElement={<Icon name="web" size={20} color="#2A5E8D"/>}
                                                 onPress={() => {
                                                     this._openUrl(data.contacts.website[0].value)
-                                                }}><Text>{data.contacts.website[0].value}</Text></Card>
+                                                }}><Text>{data.contacts.website[0].value}</Text></ListItem>
                 }
             }
 
             // Create Address Card
             const address_str = data.location.address.street + ', ' + data.location.address.city + ' ' + data.location.address.postalCode;
-            let address_element = <Card
-                                    // title={address_str}
+            let address_element = <ListItem
+                                    title={address_str}
                                     leftElement={<Icon name="directions" size={20} color="#2A5E8D"/>}
-                                    onPress={() => {this._open_navigation(data.location.position)}}><Text>{address_str}</Text></Card>;
+                                    onPress={() => {this._open_navigation(data.location.position)}}><Text>{address_str}</Text></ListItem>;
 
             // Transit
             if (data.isTransit) {
@@ -138,11 +138,14 @@ class PlaceDetailsScreen extends React.Component<Props> {
             return (
                 <View style={styles.container}>
                     <ScrollView>
-                        <Image
-                            source={{uri:data.image}}
-                            style={styles.image}
-                            PlaceholderContent={<ActivityIndicator/>}
-                        />
+                        <View>
+                            <Image
+                                source={{uri:data.image}}
+                                style={styles.image}
+                                PlaceholderContent={<ActivityIndicator/>}
+                            />
+                            <FAB buttonColor="#2A5E8D" iconTextColor="white" onClickAction={() => {this._open_navigation(data.location.position)}} visible={true} iconTextComponent={<Icon name="directions"/>} />
+                        </View>
                         <View style={styles.text_container}>
                             <Text style={styles.place_title}>{data['name']}</Text>
                             {data['categories'].map(item => <Text key={item.id} style={styles.place_category}>{item.title}</Text>)}
@@ -170,7 +173,7 @@ class PlaceDetailsScreen extends React.Component<Props> {
                                                     {id: item.id, place_title:item.title})
                                             }}
                                             rightIcon={
-                                                <Icon name="search" color="#2A5E8D" />
+                                                <Icon name="play-arrow" color="#2A5E8D" />
                                             }
                                         />
                                     ))
@@ -194,7 +197,6 @@ class PlaceDetailsScreen extends React.Component<Props> {
                                 }
                         </View>
                     </ScrollView>
-                    <FAB buttonColor="#2A5E8D" iconTextColor="white" onClickAction={() => {this._open_navigation(data.location.position)}} visible={true} iconTextComponent={<Icon name="directions"/>} />
                 </View>
             );
         }
