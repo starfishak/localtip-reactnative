@@ -6,9 +6,7 @@ You can view the Ionic v4 version of this app here: [https://github.com/starfish
 ## Overview ##
 The mobile app gives a list of nearby places based on the Here API. Users are able to see place details, such as phone numbers, websites, nearby public transit, and directions. If the place is a public transport station, users are able to see transit departing soon. The homepage updates with an image of the location the user is in from the Unsplash API.
 
-![Homepage](screenshots/1.png)
-![Place Details](screenshots/2.png)
-![Public Transit Details](screenshots/3.png)
+![Homepage](screenshots/1.png) ![Place Details](screenshots/2.png) ![Public Transit Details](screenshots/3.png)
 
 ## Clone & Demo ##
 To test the LocalTip app, clone this repo.
