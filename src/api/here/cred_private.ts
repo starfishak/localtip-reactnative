@@ -1,6 +1,6 @@
 const Cred = {
-    apiKey: 'vUc1ZRcHoQbo5ewxIORP',
-    apiCode: 'kdj2WuRpwj3kouT9oEqO4w'
+    apiKey: '',
+    apiCode: ''
 };
 
 export default Cred;
